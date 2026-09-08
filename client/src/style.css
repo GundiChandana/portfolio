@@ -1,0 +1,169 @@
+:root {
+  /* Color */
+  --bg: #0b0f17;
+  --surface: #131a26;
+  --surface-2: #1b2433;
+  --border: #262f42;
+  --text: #e7eaf0;
+  --text-dim: #8b95a8;
+  --text-faint: #545f75;
+  --accent: #45e0c4;      /* signal teal — data in motion */
+  --accent-soft: rgba(69, 224, 196, 0.12);
+  --accent-2: #f0a83b;    /* amber — highlight / log-level marker */
+  --accent-2-soft: rgba(240, 168, 59, 0.12);
+  --danger: #f0603b;
+
+  /* Type */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+
+  /* Layout */
+  --max-width: 1100px;
+  --radius: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 38px);
+  margin-bottom: 12px;
+}
+
+.section-lede {
+  color: var(--text-dim);
+  max-width: 560px;
+  font-size: 16px;
+  margin-bottom: 48px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #06110d;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Pipeline divider — the signature motif. Represents a message moving
+   through a queue between sections. Used sparingly. */
+.pipeline-divider {
+  position: relative;
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+  overflow: visible;
+}
+
+.pipeline-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px 2px var(--accent-soft);
+  transform: translateY(-50%);
+  animation: pipeline-flow 4.5s linear infinite;
+}
+
+@keyframes pipeline-flow {
+  0% { left: 0%; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
